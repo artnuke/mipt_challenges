@@ -4,7 +4,6 @@ import tests
 
 def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwargs):
     print("Starting Evaluation.....")
-    #KSDMKASD
     output = {}
     if phase_codename == "dev":
         print("Evaluating for Dev Phase")
