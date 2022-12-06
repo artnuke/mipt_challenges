@@ -11,7 +11,8 @@ def get_curr_working_dir():
 def run():
     current_working_directory = get_curr_working_dir()
     sys.path.append("{}".format(current_working_directory))
-    sys.path.append("{}/challenge_data/challenge_1".format(current_working_directory))
+    sys.path.append(
+        "{}/challenge_data/challenge_1".format(current_working_directory))
 
     challenge_id = 1
     challenge_phase = "test"  # Add the challenge phase codename to be tested
