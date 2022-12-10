@@ -39,8 +39,8 @@ install("requests==2.25.1")
 install_local_package("package_folder_name")
 
 """
-from .main import evaluate
-import mipt
+
+
 import os
 import subprocess
 import sys
@@ -57,3 +57,5 @@ def install(package):
 
 
 install("unittest")
+from .mipt import test
+from .main import evaluate
