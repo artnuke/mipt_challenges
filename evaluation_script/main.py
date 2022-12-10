@@ -1,8 +1,7 @@
 import random
-import tests
 import sys
 
-from mipt import test
+# from mipt import test
 
 
 def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwargs):
