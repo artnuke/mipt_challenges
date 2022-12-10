@@ -41,7 +41,7 @@ def get_basic_score(log):
 class TestLossAndDerivatives(unittest.TestCase):
 
     ref_dict = np.load(
-        'evaluation_script/data_assignment02.npy', allow_pickle=True).item()
+        'data_assignment02.npy', allow_pickle=True).item()
     X_ref = ref_dict['X_ref']
     y_ref = ref_dict['y_ref']
     w_hat = ref_dict['w_hat']
