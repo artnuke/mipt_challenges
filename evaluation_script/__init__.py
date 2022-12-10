@@ -41,8 +41,6 @@ install_local_package("package_folder_name")
 """
 
 
-from .main import evaluate
-from .mipt import test
 import os
 import subprocess
 import sys
@@ -55,8 +53,9 @@ def install(package):
     # Args:
     #     package ([str]): Package name with version
 
-    subprocess.check_call([sys.executable, "-m", "pip",
-                          "install", package], check=True)
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package], check=True)
 
 
 install("unittest==0.0")
+from .mipt import test
+from .main import evaluate
