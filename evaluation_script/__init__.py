@@ -40,7 +40,7 @@ install_local_package("package_folder_name")
 
 """
 from .main import evaluate
-from .mipt import test
+import mipt
 import os
 import subprocess
 import sys
