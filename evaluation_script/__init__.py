@@ -39,6 +39,21 @@ install("requests==2.25.1")
 install_local_package("package_folder_name")
 
 """
-
-from .mipt import test
 from .main import evaluate
+from .mipt import test
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+
+def install(package):
+    # Install a pip python package
+
+    # Args:
+    #     package ([str]): Package name with version
+
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+
+install("unittest")
