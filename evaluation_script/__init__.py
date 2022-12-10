@@ -53,9 +53,11 @@ def install(package):
     # Args:
     #     package ([str]): Package name with version
 
-    subprocess.run([sys.executable, "-m", "pip", "install", package],check=True)
+    subprocess.run([sys.executable, "-m", "pip",
+                   "install", package], check=True)
 
 
-# install("unittest==0.0")
+install("unittest==0.0")
+
 from .mipt import test
 from .main import evaluate
