@@ -40,4 +40,5 @@ install_local_package("package_folder_name")
 
 """
 
+from .mipt import test
 from .main import evaluate

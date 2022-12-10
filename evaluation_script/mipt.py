@@ -1,23 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import sys
 
-import numpy as np
-import json
-import unittest
-import time
-
-import random
-
-import collections
-import pickle
-import io
-
-import torch
-from torch import nn
-
-from submission import LossAndDerivatives
 
 
 def get_basic_score(log):
