@@ -53,7 +53,7 @@ def install(package):
     # Args:
     #     package ([str]): Package name with version
 
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package],check=True)
+    subprocess.run([sys.executable, "-m", "pip", "install", package],check=True)
 
 
 install("unittest==0.0")
