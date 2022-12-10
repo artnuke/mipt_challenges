@@ -57,7 +57,7 @@ def install(package):
                    "install", package], check=True)
 
 
-install("unittest==0.0")
+install("torch")
 
 from .mipt import test
 from .main import evaluate
