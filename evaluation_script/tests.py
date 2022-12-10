@@ -3,4 +3,4 @@ def main():
 
 
 def wow():
-    return "wow!"
+    return "passed!"
