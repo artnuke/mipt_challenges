@@ -16,7 +16,7 @@ def run():
 
     challenge_id = 1
     challenge_phase = "test"  # Add the challenge phase codename to be tested
-    annotation_file_path = "{}/annotations/test_annotations_testsplit.json".format(
+    annotation_file_path = "{}/annotations/data_assignment02.npy".format(
         current_working_directory
     )  # Add the test annotation file path
     user_submission_file_path = "{}/submission.py".format(

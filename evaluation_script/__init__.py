@@ -58,6 +58,6 @@ def install(package):
 
 
 install("torch")
-sys.path.insert(1, 'data_assignment02.npy')
-from .mipt import test
+
+
 from .main import evaluate
