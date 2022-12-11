@@ -9,7 +9,7 @@ import numpy as np
 import json
 import unittest
 import time
-
+import importlib.util
 import random
 
 import collections
@@ -43,14 +43,17 @@ def get_basic_score(log):
 
 def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwargs):
     print("Starting Evaluation.....")
-    submission_metadata = kwargs.get("submission_metadata")
-    sys.path.insert(1, 'user_submission_file')
 
+    submission_metadata = kwargs.get("submission_metadata")
+
+    file_name = os.path.basename(user_submission_file)
+    module_name = os.path.splitext(file_name)[0]
+
+    # Importing user submission class
     spec = importlib.util.spec_from_file_location(
-        "LossAndDerivatives", user_submission_file)
-    foo = importlib.util.module_from_spec(spec)
-    sys.modules["LossAndDerivatives"] = foo
-    spec.loader.exec_module(foo)
+        module_name, user_submission_file)
+    user_submission_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(user_submission_module)
 
     class TestLossAndDerivatives(unittest.TestCase):
 
@@ -59,64 +62,66 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         X_ref = ref_dict['X_ref']
         y_ref = ref_dict['y_ref']
         w_hat = ref_dict['w_hat']
-        knn_test = LossAndDerivatives
+        knn_test = user_submission_module.LossAndDerivatives
 
         def test_mse_derivative(self):
-            mse_derivative = LossAndDerivatives.mse_derivative(
+            mse_derivative = user_submission_module.LossAndDerivatives.mse_derivative(
                 self.X_ref, self.y_ref, self.w_hat)
             self.assertTrue(np.allclose(
                 mse_derivative, self.ref_dict['mse_derivative'], atol=1e-4))
 
         def test_mae_derivative(self):
-            mae_derivative = LossAndDerivatives.mae_derivative(
+            mae_derivative = user_submission_module.LossAndDerivatives.mae_derivative(
                 self.X_ref, self.y_ref, self.w_hat)
             self.assertTrue(np.allclose(
                 mae_derivative, self.ref_dict['mae_derivative'], atol=1e-4))
 
         def test_l2_reg_derivative(self):
-            l2_reg_derivative = LossAndDerivatives.l2_reg_derivative(
+            l2_reg_derivative = user_submission_module.LossAndDerivatives.l2_reg_derivative(
                 self.w_hat)
             self.assertTrue(np.allclose(l2_reg_derivative,
                             self.ref_dict['l2_reg_derivative'], atol=1e-4))
 
         def test_l1_reg_derivative(self):
-            l1_reg_derivative = LossAndDerivatives.l1_reg_derivative(
+            l1_reg_derivative = user_submission_module.LossAndDerivatives.l1_reg_derivative(
                 self.w_hat)
             self.assertTrue(np.allclose(l1_reg_derivative,
                             self.ref_dict['l1_reg_derivative'], atol=1e-4))
 
         def test_mse(self):
-            mse = LossAndDerivatives.mse(self.X_ref, self.y_ref, self.w_hat)
+            mse = user_submission_module.LossAndDerivatives.mse(
+                self.X_ref, self.y_ref, self.w_hat)
             self.assertTrue(np.allclose(mse, self.ref_dict['mse'], atol=1e-4))
 
         def test_mae(self):
-            mae = LossAndDerivatives.mae(self.X_ref, self.y_ref, self.w_hat)
+            mae = user_submission_module.LossAndDerivatives.mae(
+                self.X_ref, self.y_ref, self.w_hat)
             self.assertTrue(np.allclose(mae, self.ref_dict['mae'], atol=1e-4))
 
         def test_l2_reg(self):
-            l2_reg = LossAndDerivatives.l2_reg(self.w_hat)
+            l2_reg = user_submission_module.LossAndDerivatives.l2_reg(
+                self.w_hat)
             self.assertTrue(np.allclose(
                 l2_reg, self.ref_dict['l2_reg'], atol=1e-4))
 
         def test_l1_reg(self):
-            l1_reg = LossAndDerivatives.l1_reg(self.w_hat)
+            l1_reg = user_submission_module.LossAndDerivatives.l1_reg(
+                self.w_hat)
             self.assertTrue(np.allclose(
                 l1_reg, self.ref_dict['l1_reg'], atol=1e-4))
-
-    score = 0
-    output = {}
 
     TestLossAndDerivatives.data_file = "data"
 
     suite = unittest.TestLoader().loadTestsFromTestCase(
-        TestLossAndDerivatives())
+        TestLossAndDerivatives)
 
     string_io = io.StringIO()
     unittest.TextTestRunner(verbosity=2, stream=string_io).run(suite)
-    score_basic = get_basic_score(string_io.getvalue())
+    score = get_basic_score(string_io.getvalue())
 
-    print(score_basic)
+    print(score)
 
+    output = {}
     output['result'] = [
         {
             'train_split': {

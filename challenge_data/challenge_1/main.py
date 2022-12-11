@@ -117,9 +117,9 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
 
     string_io = io.StringIO()
     unittest.TextTestRunner(verbosity=2, stream=string_io).run(suite)
-    score_basic = get_basic_score(string_io.getvalue())
+    score = get_basic_score(string_io.getvalue())
 
-    print(score_basic)
+    print(score)
 
     output = {}
     output['result'] = [
