@@ -1,3 +1,4 @@
+import importlib.util
 import random
 import sys
 # from mipt import test
@@ -44,6 +45,12 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
     print("Starting Evaluation.....")
     submission_metadata = kwargs.get("submission_metadata")
     sys.path.insert(1, 'user_submission_file')
+
+    spec = importlib.util.spec_from_file_location(
+        "LossAndDerivatives", user_submission_file)
+    foo = importlib.util.module_from_spec(spec)
+    sys.modules["LossAndDerivatives"] = foo
+    spec.loader.exec_module(foo)
 
     class TestLossAndDerivatives(unittest.TestCase):
 
