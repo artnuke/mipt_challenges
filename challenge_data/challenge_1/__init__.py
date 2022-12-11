@@ -41,3 +41,4 @@ install_local_package("package_folder_name")
 """
 
 from .main import evaluate
+global data_file

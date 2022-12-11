@@ -38,10 +38,10 @@ def get_basic_score(log):
     return score
 
 
-class TestLossAndDerivatives(unittest.TestCase):
+class TestLossAndDerivatives(unittest.TestCase, ):
 
     ref_dict = np.load(
-        'data_assignment02.npy', allow_pickle=True).item()
+        data_file, allow_pickle=True).item()
     X_ref = ref_dict['X_ref']
     y_ref = ref_dict['y_ref']
     w_hat = ref_dict['w_hat']
@@ -88,7 +88,8 @@ class TestLossAndDerivatives(unittest.TestCase):
             l1_reg, self.ref_dict['l1_reg'], atol=1e-4))
 
 
-def test():
+def test(annotation_file):
+    
     suite = unittest.TestLoader().loadTestsFromTestCase(TestLossAndDerivatives)
 
     string_io = io.StringIO()

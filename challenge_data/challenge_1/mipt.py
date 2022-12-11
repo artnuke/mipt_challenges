@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
-
 import sys
-
+import os
 import numpy as np
 import json
 import unittest
@@ -16,8 +15,6 @@ import io
 
 import torch
 from torch import nn
-
-from submission import LossAndDerivatives
 
 
 def get_basic_score(log):
@@ -41,10 +38,10 @@ def get_basic_score(log):
     return score
 
 
-class TestLossAndDerivatives(unittest.TestCase):
+class TestLossAndDerivatives(unittest.TestCase, ):
 
     ref_dict = np.load(
-        'challenge_data/challenge_1/data_assignment02.npy', allow_pickle=True).item()
+        os.environ["annotation"], allow_pickle=True).item()
     X_ref = ref_dict['X_ref']
     y_ref = ref_dict['y_ref']
     w_hat = ref_dict['w_hat']
@@ -91,7 +88,10 @@ class TestLossAndDerivatives(unittest.TestCase):
             l1_reg, self.ref_dict['l1_reg'], atol=1e-4))
 
 
-def test():
+def test(annotation_file):
+
+    
+    print(os.environ["annotation"])
     suite = unittest.TestLoader().loadTestsFromTestCase(TestLossAndDerivatives)
 
     string_io = io.StringIO()
