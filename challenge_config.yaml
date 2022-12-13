@@ -59,7 +59,7 @@ challenge_phases:
 dataset_splits:
   - id: 1
     name: Test Split
-    codename: test_split
+    codename: test
 
 challenge_phase_splits:
   - challenge_phase_id: 1
