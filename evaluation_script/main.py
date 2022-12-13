@@ -123,7 +123,7 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
     output = {}
     output['result'] = [
         {
-            'train_split': {
+            'test': {
                 'Tests Passed': some.testsRun,
                 'Total': score,
             }
