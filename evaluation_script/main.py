@@ -116,26 +116,21 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
         TestLossAndDerivatives)
 
     string_io = io.StringIO()
-    unittest.TextTestRunner(verbosity=2, stream=string_io).run(suite)
+    some = unittest.TextTestRunner(verbosity=2, stream=string_io).run(suite)
+    print(some)
     score = get_basic_score(string_io.getvalue())
-
-    print(score)
 
     output = {}
     output['result'] = [
         {
             'train_split': {
-                'Metric1': 123,
-                'Metric2': 123,
-                'Metric3': 123,
+                'Tests Passed': some.testsRun,
                 'Total': score,
             }
         },
         {
-            'test_split': {
-                'Metric1': 123,
-                'Metric2': 123,
-                'Metric3': 123,
+            'train_split': {
+                'Tests Passed': some.testsRun,
                 'Total': score,
             }
         }
