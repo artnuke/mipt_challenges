@@ -18,6 +18,11 @@ Importent nuances:
 Notes: 
 - After aploading you have to aprove challenge within the admin panel.
 - You should restart worker service.
-'''
+```
 sudo docker-compose restart worker
-'''
+```
+  
+ ## Usefull links
+  1. [The Challenge configuration doc](https://evalai.readthedocs.io/en/latest/evaluation_scripts.html)
+  2. [Evaluation function](https://evalai.readthedocs.io/en/latest/evaluation_scripts.html)
+  3. [The best EvalAI doc https://evalai.readthedocs.io/_/downloads/en/latest/pdf/](https://evalai.readthedocs.io/_/downloads/en/latest/pdf/)
