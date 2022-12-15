@@ -74,6 +74,7 @@ def evaluate(test_annotation_file, user_submission_file, phase_codename, **kwarg
     class TestLossAndDerivatives(unittest.TestCase):
 
         ref_dict = np.load(
+            # данный файл находится в папке annotations и доступен через встроенную переменную test_annotation_file
             test_annotation_file, allow_pickle=True).item()
         X_ref = ref_dict['X_ref']
         y_ref = ref_dict['y_ref']
@@ -182,6 +183,10 @@ install("torch")
 #Обязательно должно быть тут!
 from .main import evaluate
 ```
+
+Далее редактируем challenge_config.yaml.
+
+Готово
 
 ## Выгружаем испытание
 
